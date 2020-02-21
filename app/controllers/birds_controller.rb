@@ -5,6 +5,7 @@ class BirdsController < ApplicationController
   # end
   def index
     birds = Bird.all
+    # Both of the following render the same...just like when you use resources: 
     # render json: birds, only: [:id, :name, :species]
     render json: birds, except: [:created_at, :updated_at]
   end
@@ -13,6 +14,7 @@ class BirdsController < ApplicationController
     bird = Bird.find_by(id: params[:id])
     # render json: {id: bird.id, name: bird.name, species: bird.species}
     # render json: bird.slice(:id, :name, :species)
+    # By using the following code, you recieve a response from the API rather than a general HTTP error
     if bird
       render json: { id: bird.id, name: bird.name, species: bird.species }
     else
